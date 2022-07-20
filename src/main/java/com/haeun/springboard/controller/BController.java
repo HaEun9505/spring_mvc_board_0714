@@ -10,6 +10,7 @@ import com.haeun.springboard.command.BCommand;
 import com.haeun.springboard.command.BContentCommand;
 import com.haeun.springboard.command.BDeleteCommand;
 import com.haeun.springboard.command.BListCommand;
+import com.haeun.springboard.command.BModifyCommand;
 import com.haeun.springboard.command.BWriteCommand;
 //스프링 컨테이너 설정 파일
 @Controller
@@ -18,6 +19,7 @@ public class BController {	//command 호출
 	BCommand command;
 	
 	@RequestMapping(value = "/write_form")	//write_form 요청이 오면
+	
 	public String write_form() {
 		
 		return "write_form";	//write_form 페이지 반환
@@ -62,6 +64,19 @@ public class BController {	//command 호출
 		model.addAttribute("request", request);
 		
 		command = new BDeleteCommand();
+		//DB에서 바뀐 내용 실행해줌
+		command.execute(model);
+		
+		return "redirect:list";		//새로고침(요청을 다시 돌려서 보여줌)
+	}
+	
+	@RequestMapping(value = "/modify")
+	public String modify(HttpServletRequest request, Model model) {
+		
+		//request 객체를 model 객체에 실어서 command에 전달
+		model.addAttribute("request", request);
+		
+		command = new BModifyCommand();
 		//DB에서 바뀐 내용 실행해줌
 		command.execute(model);
 		

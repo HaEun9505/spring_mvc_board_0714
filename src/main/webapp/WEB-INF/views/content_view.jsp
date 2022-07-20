@@ -17,7 +17,9 @@
 			<tr>
 				<td>글쓴이</td>
 				<!-- 데이터베이스 필드명과 동일하게 -->
-				<td><input type="text" name="bname" size="50" value="${dto.bname }"></td>
+				<td>
+					<input type="text" name="bname" size="50" value="${dto.bname }">
+				</td>
 			</tr>
 			<tr>
 				<td>글제목</td>

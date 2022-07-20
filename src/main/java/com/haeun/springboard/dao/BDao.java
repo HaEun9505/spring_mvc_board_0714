@@ -113,7 +113,7 @@ public class BDao {
 		return dtos;	// 리스트 반환
 	}
 	
-	//한개만 반환하므로 배열 x, 반환값 o
+	//한개만 반환하므로 배열 x
 	public BDto contentView(String strbid) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -192,4 +192,37 @@ public class BDao {
 			}			
 		}
 	}
+	
+	public void modify(String bid, String bname, String btitle, String bcontent) {	 // 사용자가 입력한 3개의 값을 받음
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		//PreparedStatement - SQL구문을 실행시키는 기능
+		try {
+			conn = dataSource.getConnection();
+			String sql = "UPDATE mvc_board SET bname=?, btitle=?, bcontent=? WHERE bid=?";
+			//물음표의 n번째 값 지정(1부터 시작)
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, bname);
+			pstmt.setString(2, btitle);
+			pstmt.setString(3, bcontent);
+			pstmt.setInt(4, Integer.parseInt(bid));	//문자열이므로 숫자로 변환
+			pstmt.executeUpdate();	// integer 반환 가능(실행 성공하면 1을 반환)
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			try {
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn !=null) {
+					conn.close();
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}			
+		}
+	}
+	
 }
