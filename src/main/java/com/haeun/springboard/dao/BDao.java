@@ -115,6 +115,10 @@ public class BDao {
 	
 	//한개만 반환하므로 배열 x
 	public BDto contentView(String strbid) {
+		
+		//이 클래스 안에 있는 upHit 메소드 호출
+		this.upHit(strbid);	//메소드 호출할때마다 bhit 값 1씩 증가
+		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -223,6 +227,39 @@ public class BDao {
 				e.printStackTrace();
 			}			
 		}
+	}
+	
+	//다른 클래스에서 접근 못하게 private으로 접근지정자, 반환 x
+	//메소드 호출할때마다 bhit 값 1씩 증가
+	private void upHit(String bid) {	//조회수
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		//PreparedStatement - SQL구문을 실행시키는 기능
+		try {
+			conn = dataSource.getConnection();
+			
+			String sql = "UPDATE mvc_board SET bhit=bhit+1 WHERE bid=?";
+			//물음표의 n번째 값 지정(1부터 시작)
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(bid));	//문자열이므로 숫자로 변환
+			pstmt.executeUpdate();	// integer 반환 가능(실행 성공하면 1을 반환)
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			try {
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn !=null) {
+					conn.close();
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}			
+		}
+		
 	}
 	
 }
