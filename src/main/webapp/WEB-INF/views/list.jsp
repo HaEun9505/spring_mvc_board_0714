@@ -23,7 +23,11 @@
 			<tr>
 				<td>${dto.bid }</td>
 				<td>${dto.bname }</td>
-				<td><a href="content_view?bid=${dto.bid }">${dto.btitle }</a></td>
+				<td>
+					<c:forEach begin="1" end="${dto.bindent }">&nbsp; &nbsp;</c:forEach>
+					<!-- 댓글의 bindent값에 따라서 띄어쓰기 -->
+					<a href="content_view?bid=${dto.bid }">${dto.btitle }</a>
+				</td>
 				<td>${dto.bdate }</td>
 				<td>${dto.bhit }</td>	
 			</tr>

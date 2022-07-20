@@ -11,6 +11,8 @@ import com.haeun.springboard.command.BContentCommand;
 import com.haeun.springboard.command.BDeleteCommand;
 import com.haeun.springboard.command.BListCommand;
 import com.haeun.springboard.command.BModifyCommand;
+import com.haeun.springboard.command.BReplyCommand;
+import com.haeun.springboard.command.BReplyViewCommand;
 import com.haeun.springboard.command.BWriteCommand;
 //스프링 컨테이너 설정 파일
 @Controller
@@ -82,4 +84,27 @@ public class BController {	//command 호출
 		
 		return "redirect:list";		//새로고침(요청을 다시 돌려서 보여줌)
 	}
+	
+	@RequestMapping(value = "/reply_view")	//덧글을 달 수 있는 폼
+	public String reply_view(HttpServletRequest request, Model model) {
+		
+		//request 객체를 model 객체에 실어서 command에 전달
+		model.addAttribute("request", request);
+		
+		command = new BReplyViewCommand();
+		command.execute(model);
+		
+		return "reply_view";
+	}
+	@RequestMapping(value = "/reply")
+	public String reply(HttpServletRequest request, Model model) {
+		
+		model.addAttribute("request", request);
+		
+		command = new BReplyCommand();
+		command.execute(model);
+		
+		return "redirect:list";		//새로고침(요청을 다시 돌려서 보여줌)
+	}
+	
 }

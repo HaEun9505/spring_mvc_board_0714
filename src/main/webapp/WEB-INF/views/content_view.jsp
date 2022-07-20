@@ -33,6 +33,7 @@
 			</tr>
 			<tr>
 				<td colspan="2" align="right">
+					<input type="button" value="답변" onclick="location.href='reply_view?bid='+${dto.bid}">
 					<input type="submit" value="수정">
 					<input type="button" value="삭제" onclick="location.href='delete?bid='+${dto.bid}">
 					<input type="button" value="목록" onclick="location.href='list'">

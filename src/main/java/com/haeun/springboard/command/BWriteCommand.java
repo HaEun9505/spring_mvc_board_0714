@@ -14,6 +14,7 @@ public class BWriteCommand implements BCommand {
 	public void execute(Model model) {
 		
 		//Map<key,value> - key:필드명, value:값
+		//map 안에 든 값을 뽑아냄(arrayList와 비슷)
 		Map<String, Object> map = model.asMap();
 		//model객체로 전달받은 데이터를 request객체로 받기
 		HttpServletRequest request = (HttpServletRequest) map.get("request");

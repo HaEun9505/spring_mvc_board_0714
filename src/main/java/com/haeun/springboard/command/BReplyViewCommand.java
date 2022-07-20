@@ -7,24 +7,26 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
 
 import com.haeun.springboard.dao.BDao;
+import com.haeun.springboard.dto.BDto;
 
-public class BModifyCommand implements BCommand {
+public class BReplyViewCommand implements BCommand {
 
 	@Override
 	public void execute(Model model) {
-		//map 안에 든 값을 뽑아냄(arrayList와 비슷)
+		
+		//map안의 값 가져오기(==ArrayList)
 		Map<String, Object> map = model.asMap();
 		//model객체로 전달받은 데이터를 request객체로 받기
-		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		HttpServletRequest request = (HttpServletRequest)map.get("request");	
 		
 		String bid = request.getParameter("bid");
-		String bname = request.getParameter("bname");
-		String btitle = request.getParameter("btitle");
-		String bcontent = request.getParameter("bcontent");
+		
 		
 		BDao dao = new BDao();
-		//dao에 있는 modify 메소드 호출
-		dao.modify(bid, bname, btitle, bcontent);
+		BDto dto = dao.replyView(bid);
+		
+		//BDto로 받아서 model 객체에 탑재
+		model.addAttribute("dto", dto);
 
 	}
 

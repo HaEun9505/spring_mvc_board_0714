@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 
 import com.haeun.springboard.dao.BDao;
 
-public class BModifyCommand implements BCommand {
+public class BReplyCommand implements BCommand {
 
 	@Override
 	public void execute(Model model) {
@@ -17,14 +17,17 @@ public class BModifyCommand implements BCommand {
 		//model객체로 전달받은 데이터를 request객체로 받기
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		
-		String bid = request.getParameter("bid");
+		String bid = request.getParameter("bid");		
 		String bname = request.getParameter("bname");
 		String btitle = request.getParameter("btitle");
 		String bcontent = request.getParameter("bcontent");
+		String bgroup= request.getParameter("bgroup");
+		String bstep= request.getParameter("bstep");
+		String bindent= request.getParameter("bindent");
 		
-		BDao dao = new BDao();
-		//dao에 있는 modify 메소드 호출
-		dao.modify(bid, bname, btitle, bcontent);
+		BDao dao = new BDao();		
+		//dao 메소드
+		dao.reply(bid, bname, btitle, bcontent, bgroup, bstep, bindent);
 
 	}
 
