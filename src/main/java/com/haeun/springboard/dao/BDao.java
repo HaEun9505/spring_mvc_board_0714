@@ -139,8 +139,7 @@ public class BDao {
 				int bstep = rs.getInt("bstep");
 				int bindent = rs.getInt("bindent");
 				
-				dto = new BDto(bid, bname, btitle, bcontent, bdate, bhit, bgroup, bstep, bindent);
-							
+				dto = new BDto(bid, bname, btitle, bcontent, bdate, bhit, bgroup, bstep, bindent);	
 			}
 			
 		}catch (Exception e) {
@@ -164,4 +163,33 @@ public class BDao {
 		return dto;
 	}
 	
+	//반환값 x
+	public void delete(String strbid) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = dataSource.getConnection();
+			//id 값을 찾아서 해당 라인 삭제
+			String sql = "DELETE FROM mvc_board WHERE bid=?";
+			pstmt = conn.prepareStatement(sql);	
+			pstmt.setInt(1, Integer.parseInt(strbid));
+			//문자열로 들어온 strbid를 int형으로 형변환
+			pstmt.executeUpdate();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn !=null) {
+					conn.close();
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}			
+		}
+	}
 }

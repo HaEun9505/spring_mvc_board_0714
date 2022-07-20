@@ -12,6 +12,8 @@
 	<!-- cellpadding: 셀과 글자 사이의 간격, cellspacing : 셀 간의 간격 -->
 	<table width="500" cellpadding="0" cellspacing="0" border="1">
 		<form action="modify">
+			<!-- submit버튼을 누르면 bid 값이 넘어가지만 안보이게 숨김 -->
+			<input type="hidden" name="bid" value="${dto.bid }">
 			<tr>
 				<td>글쓴이</td>
 				<!-- 데이터베이스 필드명과 동일하게 -->
@@ -30,8 +32,7 @@
 			<tr>
 				<td colspan="2" align="right">
 					<input type="submit" value="수정">
-					<!-- <input type="button" value="삭제" onclick="location.href='delete'"> -->
-					<a href="delete?bid=${dto.bid }">삭제</a>										
+					<input type="button" value="삭제" onclick="location.href='delete?bid='+${dto.bid}">
 					<input type="button" value="목록" onclick="location.href='list'">
 				</td>
 			</tr>
