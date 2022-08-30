@@ -5,15 +5,15 @@ import java.sql.Timestamp;
 //데이터 이동 객체
 public class BDto {
 	
-	int bid;
-	String bname;
-	String btitle;
-	String bcontent;
-	Timestamp bdate;
-	int bhit;
-	int bgroup;
-	int bstep;
-	int bindent;
+	int bid;			//글 번호
+	String bname;		//글쓴이
+	String btitle;		//글 제목
+	String bcontent;	//글 내용
+	Timestamp bdate;	//작성일
+	int bhit;			//조회수
+	int bgroup;			//답글과의 그룹화(1개의 글에 답글 여러개를 묶음)
+	int bstep;			//답글 단계
+	int bindent;		//답글의 단계에 따른 들여쓰기
 	
 	public BDto() {
 		super();

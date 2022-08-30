@@ -334,6 +334,7 @@ public class BDao {
 			//댓글을 달면 원글보다 1씩 증가해야 함
 			pstmt.setInt(5, Integer.parseInt(bstep)+1);
 			pstmt.setInt(6, Integer.parseInt(bindent)+1);
+			// 원글에서 가져온 bgroup, bstep, bindent
 			pstmt.executeUpdate();	// integer 반환 가능
 			
 		}catch (Exception e) {
